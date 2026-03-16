@@ -7,7 +7,7 @@
 <ul>
   <li><a href="https://github.com/junegunn/fzf">fzf</a></li>
   <li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a></li>
-  <li><a href="https://github.com/golang/tools/tree/master/gopls">mby gopls, idk</a></li>
+  <li><a href="https://github.com/golangci/golangci-lint">golangci-lint</a> - required by <code>golangci-lint-langserver</code> (Mason). Install with: <code>go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest</code></li>
   <li>for rust do not use the mason rust-analyzer</li>
   <li>...</li>
 </ul>
