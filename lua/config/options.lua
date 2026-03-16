@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 -- Make line numbers default
+vim.o.termguicolors = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.colorcolumn = "120"
