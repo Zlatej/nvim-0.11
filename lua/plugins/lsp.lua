@@ -185,6 +185,7 @@ return { -- LSP Plugins
 						map("<leader>th", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 						end, "[T]oggle Inlay [H]ints")
+						vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 					end
 
 					-- You will likely want to reduce updatetime which affects CursorHold
@@ -204,7 +205,8 @@ return { -- LSP Plugins
 			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
 			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
