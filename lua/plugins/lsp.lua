@@ -28,6 +28,41 @@
 -- 	Copilot = "",
 -- }
 
+-- Configure LSP servers using the native Neovim 0.11+ API
+-- This ensures settings reach the language servers directly
+vim.lsp.config("gopls", {
+	settings = {
+		gopls = {
+			gofumpt = true,
+			usePlaceholders = true,
+			staticcheck = true,
+			analyses = {
+				unusedparams = true,
+				shadow = true,
+			},
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
+})
+
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			completion = {
+				callSnippet = "Replace",
+			},
+		},
+	},
+})
+
 return { -- LSP Plugins
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -178,12 +213,15 @@ return { -- LSP Plugins
 					-- code, if the language server you are using supports them
 					--
 					-- This may be unwanted, since they displace some of your code
-					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-						map("<leader>th", function()
-							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "[T]oggle Inlay [H]ints")
-						vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
-					end
+					vim.defer_fn(function()
+						pcall(function()
+							vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+						end)
+					end, 500)
+
+					map("<leader>th", function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+					end, "[T]oggle Inlay [H]ints")
 
 					-- You will likely want to reduce updatetime which affects CursorHold
 					-- note: this setting is global and should be set only once
@@ -227,6 +265,15 @@ return { -- LSP Plugins
 								-- fillstruct = true,
 								unusedparams = true,
 								shadow = true,
+							},
+							hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
 							},
 						},
 					},
