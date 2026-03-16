@@ -85,7 +85,12 @@ vim.o.scrolloff = 12
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({ virtual_text = true, float = { border = "rounded" } })
+
+-- Add borders to LSP hover (Shift+K) and signature help windows
+vim.keymap.set("n", "K", function()
+	vim.lsp.buf.hover({ border = "rounded" })
+end, { desc = "LSP Hover" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count=1, float=true}) end, { desc = "Go to next [D]iagnostics message" })
