@@ -1,5 +1,9 @@
 <h1 align="center">one config to plug them all, in neovim bind them</h1>
 
+<p align="center"><b>archived</b> — nvim v0.12 brought major changes and i was lazy to update and refactor this config, so i moved to a new one <a href="https://github.com/Zlatej/nvim">Zlatej/nvim</a></p>
+
+<br>
+
 <p><i>based on <a href="https://github.com/nvim-lua/kickstart.nvim">kickstart.nvim</a>, indiperd by
 <a href="https://youtu.be/-ybCiHPWKNA?si=Uyu4S4j6HznlVLL_">the primeagen</a></i></p>
 
